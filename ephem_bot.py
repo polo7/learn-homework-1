@@ -9,6 +9,9 @@
 * При помощи условного оператора if и ephem.constellation научите 
   бота отвечать, в каком созвездии сегодня находится планета.
 """
+
+# Ссылка на моего бота - http://t.me/LP16UberBot
+
 import logging
 
 import ephem
@@ -19,7 +22,6 @@ logging.basicConfig(format='%(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO,
                     filename='bot.log'
 )
-
 
 PROXY = {
     'proxy_url': 'socks5://t3.learn.python.ru:1080',
@@ -42,6 +44,7 @@ def find_constellation(bot, update):
         update.message.reply_text(PLANET_USAGE)
     else:
         planet_name = planet_name_args[1]
+        planet_name = planet_name.capitalize()
         planet = getattr(ephem, planet_name)()
         planet.compute()
         update.message.reply_text(ephem.constellation(planet)[1])
