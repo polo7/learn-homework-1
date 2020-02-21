@@ -42,10 +42,8 @@ def find_constellation(bot, update):
         update.message.reply_text(PLANET_USAGE)
     else:
         planet_name = planet_name_args[1]
-        print(planet_name)
         planet = getattr(ephem, planet_name)()
         planet.compute()
-        print(ephem.constellation(planet))
         update.message.reply_text(ephem.constellation(planet)[1])
 
 
